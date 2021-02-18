@@ -1,0 +1,43 @@
+{% set name = "wave8" %}
+{% set version = "1.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  - url:  https://pswww.slac.stanford.edu/swdoc/tutorials/{{ name }}-{{ version }}.tar.gz
+    sha256: bb628fecc9ef43042443cfd2ed5c3a417db02c3db610609be474ad36a0e06ba6 
+  - path: LICENSE.txt
+
+build:
+  skip: True  # [win or osx]
+  noarch: python
+  number: 0
+  script:
+    - "cd firmware/python && {{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - pip
+  run:
+    - python
+
+about:
+  home: https://github.com/slaclab/wave8
+  license: BSD-3-Clause
+  license_family: BSD
+  license_file: LICENSE.txt
+  summary: 'Wave8 software and firmware'
+  description: |
+    firmware and software for wave devices.
+  doc_url: https://github.com/slaclab/wave8
+  dev_url: https://github.com/slaclab/wave8
+
+extra:
+  recipe-maintainers:
+    - valmar
+    - chrisvam
+
